@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Api\AuthenticationController;
+use \App\Http\Controllers\Api\ExchangeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login',[AuthenticationController::class,'login']);
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('send-money',[ExchangeController::class,'transferMoney']);
+});
