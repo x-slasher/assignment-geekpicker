@@ -5,7 +5,7 @@
         <h4>Third highest conversion: </h4><p>{{userData.third}}</p>
         <h4>Most conversion user: </h4><p>{{userData.most}}</p>
 
-        <button type="button" class="btn btn-info" @click="this.$router.push('/books/add')">Make Transfer</button>
+        <button type="button" class="btn btn-info" @click="this.$router.push('/transfer/add')">Make Transfer</button>
     </div>
 </template>
 

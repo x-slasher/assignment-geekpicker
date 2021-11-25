@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\exchangeTrait;
+use App\Mail\TransferMoneyMail;
 use App\Models\Conversion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ExchangeController extends Controller
@@ -34,7 +36,11 @@ class ExchangeController extends Controller
         if(empty($transferred_amount)){
             return response(['errors'=> 'Somethings wrong. Please check the data'], 404);
         }
-
+        $details = [
+            'title' => 'Transfer Money Mail',
+            'body' => $sender->name.' has transferred you '.$transferred_amount.' '.$receiver->currency
+        ];
+        Mail::to($receiver->email)->send(new TransferMoneyMail($details));
         return response($this->saveTransferData($request,$receiver,$transferred_amount,$sender),200);
 
     }

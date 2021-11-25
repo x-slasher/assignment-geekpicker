@@ -4,7 +4,7 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 
 import Main from '../components/Main';
-import AddBook from '../components/AddBook';
+import AddTransfer from '../components/AddTransfer';
 
 
 export const routes = [
@@ -24,9 +24,9 @@ export const routes = [
         component: Main
     },
     {
-        name: 'addbook',
-        path: '/books/add',
-        component: AddBook
+        name: 'AddTransfer',
+        path: '/transfer/add',
+        component: AddTransfer
     },
 
 ];
