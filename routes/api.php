@@ -23,9 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login',[AuthenticationController::class,'login']);
 
-Route::middleware('auth:api')->group(function () {
+//Route::middleware('auth:api')->group(function () {
     Route::post('send-money',[ExchangeController::class,'transferMoney']);
     Route::get('total-transaction',[DashboardController::class,'totalTransfer']);
     Route::get('third-transaction',[DashboardController::class,'thirdTransfer']);
     Route::get('most-transaction',[DashboardController::class,'mostTransfer']);
-});
+    Route::get('all-users',[ExchangeController::class,'allUser']);
+//});

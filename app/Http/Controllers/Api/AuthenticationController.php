@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,6 +24,8 @@ class AuthenticationController extends Controller
         if ($user) {
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('LaravelAuthApp')->accessToken;
+                $request->session()->put('isLoggedin','True');
+                $request->session()->put('token',$token);
                 $response = ['token' => $token,'message' => 'Login Successfully'];
                 return response($response, 200);
             } else {

@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function totalTransfer(){
-        $total_conversion_amount = Conversion::where('sender_id',auth()->user()->id)->sum('amount');
+        $id = 1;
+        $total_conversion_amount = Conversion::where('sender_id',$id)->sum('amount');
         return $this->sendResponse('The total amount converted for a particular user.',$total_conversion_amount);
     }
 
     public function thirdTransfer(){
+        $id = 1;
         $third_highest_transaction = Conversion::select([
-            'third_highest' => Conversion::select('amount')->orderByDesc('amount')->limit(1)->offset(2)->where('sender_id',auth()->user()->id)
+            'third_highest' => Conversion::select('amount')->orderByDesc('amount')->limit(1)->offset(2)->where('sender_id',$id)
         ])->first();
         return $this->sendResponse('The third highest amount of transactions for a particular user.',$third_highest_transaction['third_highest']);
     }
